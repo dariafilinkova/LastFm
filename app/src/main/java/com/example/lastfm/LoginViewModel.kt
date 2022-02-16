@@ -14,28 +14,28 @@ class LoginViewModel : ViewModel() {
     val api = LastFmAPIProvider.api
     val authenticationIsDone = MutableLiveData<Boolean>()
 
-    val errorBus = MutableLiveData<String>()
+    val wrongUserNameORPassword = MutableLiveData<String>()
 
     fun onSignInClick(username: String, password: String) {
         //if(!valid()){
-        if(username.isEmpty() && password.isEmpty()){
-            errorBus.postValue("Not_valid")
+        if (username.isEmpty() && password.isEmpty()) {
+            wrongUserNameORPassword.postValue("Valid username or password")
             return
         }
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val apiSignature = getApiSignature(username, password)
-                api.signIn(METHOD, APIKEY,username,password, apiSignature)
-                authenticationIsDone.postValue( true)
+                api.signIn(METHOD, APIKEY, username, password, apiSignature)
+                authenticationIsDone.postValue(true)
 
             } catch (e: Exception) {
-                Log.e("TAG",e.message.orEmpty())
-                errorBus.postValue(e.message)
+                Log.e("TAG", e.message.orEmpty())
+                wrongUserNameORPassword.postValue(e.message)
             }
         }
     }
 
-    private fun getApiSignature(username: String, password: String): String{
+    private fun getApiSignature(username: String, password: String): String {
         val apiSignature =
             "api_key" + APIKEY + "methodauth.getMobileSessionpassword" + password +
                     "username" + username + APISIG

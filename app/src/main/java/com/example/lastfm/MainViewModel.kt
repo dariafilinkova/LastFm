@@ -3,7 +3,7 @@ package com.example.lastfm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class MainViewModel: ViewModel() {
+class MainViewModel : ViewModel() {
 
     val isUserAlreadyAuthorized = MutableLiveData<Boolean>()
 

@@ -13,5 +13,5 @@ interface LastFmAPI {
         @Query("password") password: String,
         @Query("api_sig") apiSignature: String,
 
-    )
+        )
 }

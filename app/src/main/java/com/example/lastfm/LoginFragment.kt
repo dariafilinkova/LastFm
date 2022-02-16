@@ -33,23 +33,14 @@ class LoginFragment : Fragment() {
                 val userName = username.text.toString()
                 val password = password.text.toString()
 
-                    // if (viewModel.check(userName, password)) {
-                    viewModel.onSignInClick(userName, password)
-               // if (preference.username.isNotEmpty() && preference.password.isNotEmpty()) {
-                  /*  parentFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, SuccessfulLoginFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit()*/
-
-               //} else {
-                 /*   Toast.makeText(
-                        requireContext(),
-                        "Try again.Username or password is wrong",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()*/
-                }
+                viewModel.onSignInClick(userName, password)
+                /*   Toast.makeText(
+                       requireContext(),
+                       "Try again.Username or password is wrong",
+                       Toast.LENGTH_SHORT
+                   )
+                       .show()*/
+            }
             //}
         }
     }
@@ -67,7 +58,7 @@ class LoginFragment : Fragment() {
             }
         }
 
-        viewModel.errorBus.observe(viewLifecycleOwner){ message ->
+        viewModel.wrongUserNameORPassword.observe(viewLifecycleOwner) { message ->
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
     }

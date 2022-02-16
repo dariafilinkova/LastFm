@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.lastfm.databinding.FragmentLoginBinding
 import com.example.lastfm.databinding.FragmentSuccsessfulLoginBinding
 
 class SuccessfulLoginFragment : Fragment() {
@@ -24,10 +25,11 @@ class SuccessfulLoginFragment : Fragment() {
 
         FragmentSuccsessfulLoginBinding.bind(view).apply {
             result.text = SUCCESS
-            logOut.setOnClickListener{
+            //add name of username
+            logOut.setOnClickListener {
                 parentFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragmentContainer,LoginFragment.newInstance())
+                    .replace(R.id.fragmentContainer, LoginFragment.newInstance())
                     .commit()
             }
         }

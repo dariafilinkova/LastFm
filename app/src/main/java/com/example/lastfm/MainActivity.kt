@@ -27,11 +27,5 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fragmentContainer, baseFragment)
                 .commit()
         }
-//        if (savedInstanceState == null) {
-//            supportFragmentManager
-//                .beginTransaction()
-//                .replace(R.id.fragmentContainer, LoginFragment.newInstance())
-//                .commit()
-//        }
     }
 }
