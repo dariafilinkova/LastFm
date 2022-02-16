@@ -21,7 +21,16 @@ class SuccessfulLoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.result.text = SUCCESS
+
+        FragmentSuccsessfulLoginBinding.bind(view).apply {
+            result.text = SUCCESS
+            logOut.setOnClickListener{
+                parentFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer,LoginFragment.newInstance())
+                    .commit()
+            }
+        }
     }
 
     companion object {
