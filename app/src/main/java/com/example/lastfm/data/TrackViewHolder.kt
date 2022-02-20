@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.lastfm.R
 
-class TrackViewHolder(view:View):RecyclerView.ViewHolder(view){
+class TrackViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val trackName = view.findViewById<TextView>(R.id.songName)
     val artist = view.findViewById<TextView>(R.id.artist)
     val image = view.findViewById<ImageView>(R.id.image)
