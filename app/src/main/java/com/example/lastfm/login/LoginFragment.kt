@@ -1,4 +1,4 @@
-package com.example.lastfm
+package com.example.lastfm.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.liveData
+import com.example.lastfm.ChartListFragment
+import com.example.lastfm.R
 import com.example.lastfm.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -34,14 +35,7 @@ class LoginFragment : Fragment() {
                 val password = password.text.toString()
 
                 viewModel.onSignInClick(userName, password)
-                /*   Toast.makeText(
-                       requireContext(),
-                       "Try again.Username or password is wrong",
-                       Toast.LENGTH_SHORT
-                   )
-                       .show()*/
             }
-            //}
         }
     }
 
@@ -52,7 +46,7 @@ class LoginFragment : Fragment() {
                 preference.username = binding.username.text.toString()
                 parentFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragmentContainer, SuccessfulLoginFragment.newInstance())
+                    .replace(R.id.fragmentContainer, ChartListFragment.newInstance())
                     .addToBackStack(null)
                     .commit()
             }

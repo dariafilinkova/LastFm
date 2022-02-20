@@ -1,4 +1,4 @@
-package com.example.lastfm
+package com.example.lastfm.login
 
 import android.content.Context
 import android.content.SharedPreferences

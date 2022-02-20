@@ -3,7 +3,8 @@ package com.example.lastfm
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
+import com.example.lastfm.login.CustomPreference
+import com.example.lastfm.login.LoginFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.checkIfUserIsLoggedIn(preferences)
         viewModel.isUserAlreadyAuthorized.observe(this) { isUserAlreadyAuthorized ->
             val baseFragment = if (isUserAlreadyAuthorized) {
-                SuccessfulLoginFragment.newInstance()
+                ChartListFragment.newInstance()
             } else {
                 LoginFragment.newInstance()
             }

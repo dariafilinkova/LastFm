@@ -1,4 +1,4 @@
-package com.example.lastfm
+package com.example.lastfm.login
 
 interface Prefs {
     var username: String

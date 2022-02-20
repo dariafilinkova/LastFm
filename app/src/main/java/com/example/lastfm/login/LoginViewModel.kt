@@ -1,23 +1,26 @@
-package com.example.lastfm
+package com.example.lastfm.login
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.lastfm.data.Track
+import com.example.lastfm.data.TrackDTO
 import com.example.lastfm.netwoking.retrofit.LastFmAPIProvider
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.google.gson.Gson
+import kotlinx.coroutines.*
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 import java.security.MessageDigest
 
 class LoginViewModel : ViewModel() {
 
     val api = LastFmAPIProvider.api
     val authenticationIsDone = MutableLiveData<Boolean>()
-
     val wrongUserNameORPassword = MutableLiveData<String>()
 
     fun onSignInClick(username: String, password: String) {
-        //if(!valid()){
         if (username.isEmpty() && password.isEmpty()) {
             wrongUserNameORPassword.postValue("Valid username or password")
             return

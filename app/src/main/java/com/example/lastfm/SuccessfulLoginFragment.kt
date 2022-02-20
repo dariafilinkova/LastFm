@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.lastfm.databinding.FragmentLoginBinding
 import com.example.lastfm.databinding.FragmentSuccsessfulLoginBinding
+import com.example.lastfm.login.LoginFragment
 
 class SuccessfulLoginFragment : Fragment() {
     private lateinit var binding: FragmentSuccsessfulLoginBinding

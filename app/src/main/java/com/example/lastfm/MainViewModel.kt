@@ -2,6 +2,7 @@ package com.example.lastfm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.lastfm.login.Prefs
 
 class MainViewModel : ViewModel() {
 
