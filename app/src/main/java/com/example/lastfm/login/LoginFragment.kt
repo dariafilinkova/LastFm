@@ -1,4 +1,4 @@
-package com.example.lastfm
+package com.example.lastfm.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.example.lastfm.ChartListFragment
+import com.example.lastfm.R
 import com.example.lastfm.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private val viewModel: LoginViewModel by viewModels()
+    private val preference by lazy { CustomPreference(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,23 +28,32 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeLiveData()
         FragmentLoginBinding.bind(view).apply {
             login.setOnClickListener {
                 val userName = username.text.toString()
                 val password = password.text.toString()
-                if (viewModel.check(userName, password)) {
-                    viewModel.onSignInClick(userName, password)
-                    parentFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, SuccessfulLoginFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit()
-                } else {
-                    Toast.makeText(
-                        requireContext(), "Try again.Username or password is wrong", Toast.LENGTH_SHORT)
-                        .show()
-                }
+
+                viewModel.onSignInClick(userName, password)
             }
+        }
+    }
+
+    private fun observeLiveData() {
+        viewModel.authenticationIsDone.observe(viewLifecycleOwner) { authenticationIsDone ->
+            if (authenticationIsDone) {
+                preference.password = binding.password.text.toString()
+                preference.username = binding.username.text.toString()
+                parentFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, ChartListFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
+
+        viewModel.wrongUserNameORPassword.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
     }
 

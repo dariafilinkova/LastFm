@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.lastfm.databinding.FragmentSuccsessfulLoginBinding
+import com.example.lastfm.login.LoginFragment
 
 class SuccessfulLoginFragment : Fragment() {
     private lateinit var binding: FragmentSuccsessfulLoginBinding
@@ -21,7 +22,17 @@ class SuccessfulLoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.result.text = SUCCESS
+
+        FragmentSuccsessfulLoginBinding.bind(view).apply {
+            result.text = SUCCESS
+            //add name of username
+            logOut.setOnClickListener {
+                parentFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, LoginFragment.newInstance())
+                    .commit()
+            }
+        }
     }
 
     companion object {
